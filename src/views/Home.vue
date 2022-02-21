@@ -5,8 +5,8 @@
             <h1>Shadow UI</h1>
             <h2>A userful UI library</h2>
             <p class="actions">
-                <a>GitHub</a>
-                <a>开始</a>
+                <a href="#">GitHub</a>
+                <router-link to="/doc">开始</router-link>
             </p>
         </div>
     </div>
