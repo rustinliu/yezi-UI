@@ -1,15 +1,13 @@
 <template>
-    <div>hi</div>
-    <MyApp></MyApp>
+    <div>
+        导航栏 | <router-link to="/">App1</router-link>| <router-link to="/xxx">App2</router-link>
+    </div>
+    <hr />
+    <router-view></router-view>
 </template>
 
 <script>
-import MyApp from './components/MyApp.vue';
-
 export default {
     name: 'App',
-    components: {
-        MyApp,
-    },
 };
 </script>
