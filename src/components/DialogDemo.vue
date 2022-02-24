@@ -1,7 +1,14 @@
 <template>
     <div>Dialog</div>
     <Button @click="toggle">toggle</Button>
-    <Dialog v-model:visible="x" :closeOnclcikOverlay="false" :ok="f1" :cancel="f2"></Dialog>
+    <Dialog v-model:visible="x" :closeOnclcikOverlay="false" :ok="f1" :cancel="f2">
+        <template v-slot:content>
+            <strong> hi</strong>
+        </template>
+        <template v-slot:title>
+            <strong> haha</strong>
+        </template>
+    </Dialog>
 </template>
 
 <script lang="ts">
