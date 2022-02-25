@@ -1,13 +1,29 @@
 <template>
     <div>
-        <div v-for="(t, index) in titles" :key="index">{{ t }}</div>
-        <component v-for="(c, index) in defaults" :is="c" :key="index"></component>
+        <div class="gulu-tabs">
+  <div class="gulu-tabs-nav">
+    <div class="gulu-tabs-nav-item"
+    @click="select(t)"
+     v-for="(t,index) in titles" 
+     :key="index"
+     :class="{selected:t===selected}"
+     >{{t}}</div>
+  </div>
+  <div class="gulu-tabs-content">
+    <component class="gulu-tabs-content-item" :is="current"/>
+  </div>
     </div>
 </template>
 
 <script lang="ts">
+import { computed } from '@vue/runtime-core';
 import Tab from '../libs/Tab.vue';
 export default {
+    props:{
+        selected:{
+            type:String,
+        }
+    },
     setup(props, context) {
         const defaults = context.slots.default();
 
@@ -16,13 +32,46 @@ export default {
                 throw new Error('Tabs only accepts Tab as children');
             }
         });
+        const current =computed(()=>{return defaults.filter((tag) => tag.props.title === props.selected)[0];}) 
         const titles = defaults.map((tag) => {
             return tag.props.title;
         });
+        const select = (title:string) => {
+            context.emit('update:selected', title);
+        };
         return {
             defaults,
             titles,
+            current,
+            select,
         };
     },
 };
 </script>
+
+<style lang="scss">
+$blue: #40a9ff;
+$color: #333;
+$border-color: #d9d9d9;
+.gulu-tabs {
+  &-nav {
+    display: flex;
+    color: $color;
+    border-bottom: 1px solid $border-color;
+    &-item {
+      padding: 8px 0;
+      margin: 0 16px;
+      cursor: pointer;
+      &:first-child {
+        margin-left: 0;
+      }
+      &.selected {
+        color: $blue;
+      }
+    }
+  }
+  &-content {
+    padding: 8px 0;
+  }
+}
+</style>
