@@ -18,20 +18,14 @@
             <div class="gulu-tabs-nav-indicator" ref="indicator"></div>
         </div>
         <div class="gulu-tabs-content">
-            <component
-                class="gulu-tabs-content-item"
-                :class="{ selected: c.props.title === selected }"
-                v-for="(c, index) in defaults"
-                :key="index"
-                :is="c"
-            />
+            <component :is="current" :key="current.props.title" />
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import Tab from './Tab.vue';
-import { computed, onMounted, ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect, onMounted } from 'vue';
 export default {
     props: {
         selected: {
@@ -42,6 +36,7 @@ export default {
         const selectedItem = ref<HTMLDivElement>(null);
         const indicator = ref<HTMLDivElement>(null);
         const container = ref<HTMLDivElement>(null);
+
         onMounted(() => {
             watchEffect(() => {
                 const { width } = selectedItem.value.getBoundingClientRect();
@@ -59,6 +54,9 @@ export default {
                 throw new Error('Tabs 子标签必须是 Tab');
             }
         });
+        const current = computed(() => {
+            return defaults.find((tag) => tag.props.title === props.selected);
+        });
         const titles = defaults.map((tag) => {
             return tag.props.title;
         });
@@ -66,6 +64,7 @@ export default {
             context.emit('update:selected', title);
         };
         return {
+            current,
             defaults,
             titles,
             select,
@@ -116,14 +115,6 @@ $border-color: #d9d9d9;
 
     &-content {
         padding: 8px 0;
-
-        &-item {
-            display: none;
-
-            &.selected {
-                display: block;
-            }
-        }
     }
 }
 </style>
