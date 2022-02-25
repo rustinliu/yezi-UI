@@ -4,14 +4,14 @@
             <div
                 class="gulu-tabs-nav-item"
                 v-for="(t, index) in titles"
+                :ref="
+                    (el) => {
+                        if (t === selected) selectedItem = el;
+                    }
+                "
                 @click="select(t)"
                 :class="{ selected: t === selected }"
                 :key="index"
-                :ref="
-                    (el) => {
-                        if (t === selected) selectdItem = el;
-                    }
-                "
             >
                 {{ t }}
             </div>
@@ -22,8 +22,8 @@
                 class="gulu-tabs-content-item"
                 :class="{ selected: c.props.title === selected }"
                 v-for="(c, index) in defaults"
-                :is="c"
                 :key="index"
+                :is="c"
             />
         </div>
     </div>
@@ -31,39 +31,33 @@
 
 <script lang="ts">
 import Tab from './Tab.vue';
-import { computed, onMounted, ref, onUpdated } from 'vue';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 export default {
     props: {
         selected: {
             type: String,
         },
     },
-
     setup(props, context) {
-        const selectdItem = ref<HTMLDivElement | null>(null);
-        const defaults = context.slots.default();
+        const selectedItem = ref<HTMLDivElement>(null);
         const indicator = ref<HTMLDivElement>(null);
         const container = ref<HTMLDivElement>(null);
-        const x = () => {
-            const { width } = selectdItem.value.getBoundingClientRect();
-            indicator.value.style.width = `${width}px`;
-            const { left: left1 } = container.value.getBoundingClientRect();
-            const { left: left2 } = selectdItem.value.getBoundingClientRect();
-            const left = left2 - left1;
-            indicator.value.style.transform = `translateX(${left}px)`;
-        };
-        onMounted(x);
-        onUpdated(x),
-            defaults.forEach((tag) => {
-                if (tag.type !== Tab) {
-                    throw new Error('Tabs 子标签必须是 Tab');
-                }
+        onMounted(() => {
+            watchEffect(() => {
+                const { width } = selectedItem.value.getBoundingClientRect();
+                indicator.value.style.width = width + 'px';
+                const { left: left1 } = container.value.getBoundingClientRect();
+                const { left: left2 } = selectedItem.value.getBoundingClientRect();
+                const left = left2 - left1;
+                indicator.value.style.left = left + 'px';
             });
-        const current = computed(() => {
-            console.log('重新 return');
-            return defaults.filter((tag) => {
-                return tag.props.title === props.selected;
-            })[0];
+        });
+
+        const defaults = context.slots.default();
+        defaults.forEach((tag) => {
+            if (tag.type !== Tab) {
+                throw new Error('Tabs 子标签必须是 Tab');
+            }
         });
         const titles = defaults.map((tag) => {
             return tag.props.title;
@@ -74,9 +68,8 @@ export default {
         return {
             defaults,
             titles,
-            current,
             select,
-            selectdItem,
+            selectedItem,
             indicator,
             container,
         };
@@ -117,7 +110,7 @@ $border-color: #d9d9d9;
             left: 0;
             bottom: -1px;
             width: 100px;
-            transition: all 0.3s;
+            transition: all 250ms;
         }
     }
 
