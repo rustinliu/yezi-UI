@@ -38,6 +38,7 @@ export default {
 <style lang="scss" scoped>
 $color: #007974;
 .topnav {
+    z-index: 20;
     color: $color;
     display: flex;
     padding: 16px;
@@ -45,7 +46,6 @@ $color: #007974;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 10;
     justify-content: center;
     align-items: center;
     > .logo {
