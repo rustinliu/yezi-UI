@@ -1,45 +1,21 @@
 <template>
     <div>Dialog示例</div>
-    <h1>示例1</h1>
-    <Button @click="toggle">toggle</Button>
-    <Dialog v-model:visible="x" :closeOnclcikOverlay="false" :ok="f1" :cancel="f2">
-        <template v-slot:content>
-            <strong> hi</strong>
-        </template>
-        <template v-slot:title>
-            <strong> haha</strong>
-        </template>
-    </Dialog>
-    <h2>示例2</h2>
-    <Button @click="showDialog">showDialog</Button>
+    <Demo :component="Dialog1Demo" />
+    <Demo :component="Dialog2Demo" />
 </template>
 
 <script lang="ts">
-import Dialog from '../libs/Dialog.vue';
-import Button from '../libs/Button.vue';
-import { openDialog } from '../libs/openDialog';
-import { ref } from 'vue';
+import Demo from './Demo.vue';
+import Dialog1Demo from './Dialog1.demo.vue';
+import Dialog2Demo from './Dialog2.demo.vue';
 export default {
     components: {
-        Dialog,
-        Button,
+        Demo,
     },
     setup() {
-        const x = ref(false);
-        const toggle = () => {
-            x.value = !x.value;
-        };
-        const showDialog = () => {
-            openDialog({ title: 'haha', content: 'hihi', closeOnclcikOverlay: false });
-        };
-        const f1 = () => {};
-        const f2 = () => {};
         return {
-            x,
-            toggle,
-            f1,
-            f2,
-            showDialog,
+            Dialog1Demo,
+            Dialog2Demo,
         };
     },
 };
