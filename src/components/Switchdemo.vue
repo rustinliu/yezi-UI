@@ -4,25 +4,31 @@
         <div class="demo">
             <h2>常规用法</h2>
             <div class="demo-component">
-                <Switch1Demo />
+                <component :is="Switch1Demo"></component>
             </div>
             <div class="demo-actions">
                 <Button>查看代码</Button>
             </div>
             <div class="demo-code">
-                <pre>&lt;Switch v-model:value="bool" disabled /&gt;</pre>
+                <pre
+                    class="language-html"
+                    v-html="Prism.highlight(Switch1Demo.__sourceCode, Prism.languages.html, 'html')"
+                ></pre>
             </div>
         </div>
         <div class="demo">
             <h2>支持 disabled</h2>
             <div class="demo-component">
-                <Switch2Demo />
+                <component :is="Switch2Demo"></component>
             </div>
             <div class="demo-actions">
                 <Button>查看代码</Button>
             </div>
             <div class="demo-code">
-                <pre>&lt;Switch v-model:value="bool" disabled /&gt;</pre>
+                <pre
+                    class="language-html"
+                    v-html="Prism.highlight(Switch2Demo.__sourceCode, Prism.languages.html, 'html')"
+                ></pre>
             </div>
         </div>
     </div>
@@ -34,10 +40,11 @@ import Button from '../libs/Button.vue';
 import Switch1Demo from './Switch1.demo.vue';
 import Switch2Demo from './Switch2.demo.vue';
 import { ref } from 'vue';
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs';
+const Prism = (window as any).Prism;
 export default {
     components: {
-        Switch1Demo,
-        Switch2Demo,
         Switch,
         Button,
     },
@@ -45,6 +52,9 @@ export default {
         const bool = ref(false);
         return {
             bool,
+            Switch1Demo,
+            Switch2Demo,
+            Prism,
         };
     },
 };
