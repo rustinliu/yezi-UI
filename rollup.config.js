@@ -5,13 +5,13 @@ import dartSass from 'sass';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
-    input: 'src/lib/index.ts',
+    input: 'src/libs/index.ts',
     output: {
         globals: {
             vue: 'Vue',
         },
         name: 'Gulu',
-        file: 'dist/lib/gulu.js',
+        file: 'dist/libs/gulu.js',
         format: 'umd',
         plugins: [terser()],
     },
