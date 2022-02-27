@@ -10,6 +10,8 @@ import fs from 'fs';
 import { baseParse } from '@vue/compiler-core';
 
 export default {
+    base: './', //解决baseurl的问题
+    assertDir: 'assets',
     plugins: [md()],
     vueCustomBlockTransforms: {
         demo: (options) => {
