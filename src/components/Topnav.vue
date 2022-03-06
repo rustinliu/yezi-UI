@@ -2,7 +2,7 @@
     <div class="topnav">
         <div class="logo">
             <svg class="icon">
-                <use xlink:href="#icon-king"></use>
+                <use xlink:href="#icon-yezi"></use>
             </svg>
         </div>
         <ul class="menu">

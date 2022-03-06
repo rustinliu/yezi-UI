@@ -76,7 +76,7 @@ export default {
     }
 }
 aside {
-    background: lightblue;
+    background: lightgreen;
     width: 150px;
     padding: 16px 0;
     position: fixed;
