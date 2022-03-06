@@ -1,22 +1,21 @@
 <template>
-    <div class="topnav">
-        <div class="logo">
+    <div class="topNav" v-if="toggleMenuButtonVisible">
+        <div title="菜单" :class="{ sidebarVisible }">
+            <svg v-if="toggleMenuButtonVisible" class="toggleMenu" @click="toggleMenu">
+                <use xlink:href="#icon-menu"></use>
+            </svg>
+        </div>
+        <router-link to="/" class="logo" title="首页">
             <svg class="icon">
                 <use xlink:href="#icon-yezi"></use>
             </svg>
-        </div>
-        <ul class="menu">
-            <li>
-                <router-link to="/doc">文档</router-link>
-            </li>
-        </ul>
-        <svg v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu">
-            <use xlink:href="#icon-menu"></use>
-        </svg>
+        </router-link>
     </div>
 </template>
+
 <script lang="ts">
 import { inject, Ref } from 'vue';
+
 export default {
     props: {
         toggleMenuButtonVisible: {
@@ -29,62 +28,65 @@ export default {
         const toggleMenu = () => {
             sidebarVisible.value = !sidebarVisible.value;
         };
-        return {
-            toggleMenu,
-        };
+        return { toggleMenu, sidebarVisible };
     },
 };
 </script>
+
 <style lang="scss" scoped>
-$color: #007974;
-.topnav {
-    z-index: 20;
-    color: $color;
+$themecolor: #5da501;
+.topNav {
     display: flex;
-    padding: 16px;
+    padding: 16px 16px 12px;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    > .logo {
-        max-width: 6em;
-        margin-right: auto;
-        > svg {
-            width: 32px;
-            height: 32px;
+    width: 100vw;
+    height: 57px;
+    z-index: 10;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    .logo {
+        .icon {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
         }
     }
-    > .menu {
-        display: flex;
-        white-space: nowrap;
-        flex-wrap: nowrap;
-        > li {
-            margin: 0 1em;
-        }
-    }
-    > .toggleAside {
-        display: inline-block;
-        width: 32px;
-        height: 32px;
+    .toggleMenu {
         position: absolute;
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 28px;
+        left: 28px;
+        width: 20px;
+        height: 20px;
         display: none;
-        background: fade-out(black, 0.9);
+        fill: #666;
+        cursor: pointer;
+        transition: all 0.25s;
     }
-    @media (max-width: 500px) {
-        > .menu {
-            display: none;
+    .sidebarVisible {
+        .toggleMenu {
+            fill: $themecolor;
         }
-        > .logo {
-            margin: 0 auto;
+    }
+}
+@media (max-width: 500px) {
+    .topNav {
+        padding: 13px 16px 15px;
+        .logo {
+            margin: 4px auto 0;
         }
-        > .toggleAside {
+
+        .toggleMenu {
+            top: 19px;
             display: inline-block;
         }
+    }
+}
+@media (min-width: 500px) {
+    .topNav {
+        width: 64vw;
+        left: 18vw;
     }
 }
 </style>

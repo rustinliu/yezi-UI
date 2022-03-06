@@ -36,6 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$themecolor: #5da501;
 .aside {
     background: #fff;
     min-width: 223px;
@@ -57,17 +58,18 @@ export default {
         color: #888;
         transition: all 250ms ease;
         &:hover {
-            color: #ff8d78;
+            color: $themecolor;
         }
         .router-link-active {
-            color: #ff8d78;
+            color: $themecolor;
+            text-decoration: none;
         }
     }
 }
 @media (max-width: 500px) {
     .aside {
         transform: translateX(-223px);
-        &.asideVisible {
+        &.sidebarVisible {
             transform: translateX(0);
         }
     }

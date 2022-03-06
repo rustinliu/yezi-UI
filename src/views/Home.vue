@@ -3,11 +3,11 @@
         <div>
             <Topnav></Topnav>
             <div class="banner">
-                <h1>Shadow UI</h1>
-                <h2>A userful UI library</h2>
+                <h1>YeZi UI</h1>
+                <h2>一个基于vue 3的UI库</h2>
                 <p class="actions">
                     <a href="#">GitHub</a>
-                    <router-link to="/doc">开始</router-link>
+                    <router-link to="/doc">Start</router-link>
                 </p>
             </div>
         </div>
@@ -19,7 +19,7 @@
                     <use xlink:href="#icon-vue"></use>
                 </svg>
                 <h3>基于 Vue 3</h3>
-                <p>骄傲地使用了 Vue 3 Composition API</p>
+                <p>使用 Vue 3 的 Composition API</p>
             </li>
             <li>
                 <svg>
@@ -50,9 +50,11 @@ export default {
 <style lang="scss" scoped>
 $green: #02bcb0;
 $border-radius: 4px;
-$color: #007974;
+$themecolor: #2a484e;
+
 .topnavAndBanner {
-    background: linear-gradient(145deg, rgba(227, 255, 253, 1) 0%, rgba(183, 233, 230, 1) 100%);
+    background: rgb(168, 216, 205);
+    background: radial-gradient(circle, rgba(168, 216, 205, 1) 0%, rgba(199, 240, 241, 1) 100%);
     clip-path: ellipse(80% 60% at 50% 40%);
 }
 .features {
@@ -94,7 +96,7 @@ $color: #007974;
     }
 }
 .banner {
-    color: $color;
+    color: $themecolor;
     padding: 100px 0;
     display: flex;
     justify-content: center;
