@@ -1,4 +1,4 @@
-import './libs/gulu.scss';
+import './libs/yezi.scss';
 import './index.scss';
 import { createApp } from 'vue';
 import App from './App.vue';
