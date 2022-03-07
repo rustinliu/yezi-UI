@@ -1,16 +1,22 @@
 <demo>
-常规使用
+遮罩是否触发返回
 </demo>
 <template>
     <div>
         <Button @click="toggle">打开对话框</Button>
-        <Dialog v-model:visible="open" :closeOnclcikOverlay="false">
+        <Dialog
+            v-model:visible="open"
+            :closeOnclcikOverlay="true"
+            :onConfirm="fun1"
+            :onCancel="fun2"
+        >
             <template v-slot:content>
                 <p>你好</p>
-                <p>这是一条普通的消息</p>
+                <p>这还是一条普通的消息</p>
+                <p>但是遮罩可以触发返回了😊</p>
             </template>
             <template v-slot:title>
-                <strong>一个加粗的标题</strong>
+                <strong>还是一个加粗的标题</strong>
             </template>
         </Dialog>
     </div>
@@ -30,10 +36,17 @@ export default {
         const toggle = () => {
             open.value = !open.value;
         };
-
+        const fun1 = () => {
+            console.log('确认');
+        };
+        const fun2 = () => {
+            console.log('取消');
+        };
         return {
             open,
             toggle,
+            fun1,
+            fun2,
         };
     },
 };
