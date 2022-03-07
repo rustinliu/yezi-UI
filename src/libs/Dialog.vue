@@ -1,8 +1,11 @@
 <template>
-    <template v-if="visible">
-        <teleport to="body">
-            <div class="yezi-dialog-overlay" @click="onClickOverlay"></div>
-            <div class="yezi-dialog-wrapper">
+    <!-- <template v-if="visible"> -->
+    <teleport to="body">
+        <transition name="overlay">
+            <div v-if="visible" class="yezi-dialog-overlay" @click="onClickOverlay"></div>
+        </transition>
+        <transition name="wrapper">
+            <div v-if="visible" class="yezi-dialog-wrapper">
                 <div class="yezi-dialog">
                     <header>
                         <slot name="title"></slot>
@@ -12,13 +15,14 @@
                         <slot name="content"></slot>
                     </main>
                     <footer>
-                        <Button level="main" @click="ok">OK</Button>
-                        <Button @click="cancel">Cancel</Button>
+                        <Button @click="onCancel">Cancel</Button>
+                        <Button level="main" @click="onConfirm">OK</Button>
                     </footer>
                 </div>
             </div>
-        </teleport>
-    </template>
+        </transition>
+    </teleport>
+    <!-- </template> -->
 </template>
 
 <script lang="ts">
@@ -37,11 +41,11 @@ export default {
             type: Boolean,
             default: true,
         },
-        ok: {
+        onCancel: {
             type: Function,
             default: () => {},
         },
-        cancel: {
+        onConfirm: {
             type: Function,
             default: () => {},
         },
@@ -58,34 +62,33 @@ export default {
                 close();
             }
         };
-        const ok = () => {
-            if (props.ok && props.ok() !== false) {
+        const onCancel = () => {
+            if (props.onCancel && props.onCancel() !== false) {
                 close();
             }
         };
-        const cancel = () => {
-            if (props.cancel && props.cancel() !== false) {
+        const onConfirm = () => {
+            if (props.onConfirm && props.onConfirm() !== false) {
                 close();
             }
         };
         return {
             close,
             onClickOverlay,
-            ok,
-            cancel,
+            onCancel,
+            onConfirm,
         };
     },
 };
 </script>
 
 <style lang="scss">
-$radius: 4px;
 $border-color: #d9d9d9;
 
 .yezi-dialog {
     background: white;
-    border-radius: $radius;
-    box-shadow: 0 0 3px fade_out(black, 0.5);
+    border-radius: 4px;
+    box-shadow: 0 0 3px fade_out(#5da501, 0.5);
     min-width: 15em;
     max-width: 90%;
 
@@ -95,7 +98,7 @@ $border-color: #d9d9d9;
         left: 0;
         width: 100%;
         height: 100%;
-        background: fade_out(black, 0.5);
+        backdrop-filter: blur(5px);
         z-index: 10;
     }
 
@@ -152,5 +155,20 @@ $border-color: #d9d9d9;
             transform: translate(-50%, -50%) rotate(45deg);
         }
     }
+}
+.overlay-enter-active,
+.overlay-leave-active,
+.wrapper-enter-active,
+.wrapper-leave-active {
+    transition: all 0.25s;
+}
+.overlay-enter-from,
+.overlay-leave-to {
+    opacity: 0;
+}
+.wrapper-enter-from,
+.wrapper-leave-to {
+    transform: translate(-50%, -50%) translateY(-16px);
+    opacity: 0;
 }
 </style>
