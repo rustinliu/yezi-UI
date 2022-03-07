@@ -1,10 +1,10 @@
 <demo>
-支持 disabled
+不同尺寸（size）
 </demo>
 <template>
-    <Button disabled>禁用按钮</Button>
-    <Button theme="link" disabled>禁用链接按钮</Button>
-    <Button theme="text" disabled>禁用按钮</Button>
+    <Button size="big">大大按钮</Button>
+    <Button size="normal">普通按钮</Button>
+    <Button size="small">小小按钮</Button>
 </template>
 
 <script lang="ts">

@@ -1,9 +1,9 @@
 <demo>
-支持显示禁用
+支持显示加载中
 </demo>
 <template>
     <div>
-        <Button disabled>禁用</Button>
+        <Button loading>加载中</Button>
     </div>
 </template>
 
