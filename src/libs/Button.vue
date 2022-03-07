@@ -1,6 +1,6 @@
 <template>
-    <button class="gulu-button" :class="classes" :disabled="disabled">
-        <span v-if="loading" class="gulu-loadingIndicator"></span>
+    <button class="yezi-button" :class="classes" :disabled="disabled">
+        <span v-if="loading" class="yezi-loadingIndicator"></span>
         <slot />
     </button>
 </template>
@@ -33,9 +33,9 @@ export default {
         const { theme, size, level } = props;
         const classes = computed(() => {
             return {
-                [`gulu-theme-${theme}`]: theme,
-                [`gulu-size-${size}`]: size,
-                [`gulu-level-${level}`]: level,
+                [`yezi-theme-${theme}`]: theme,
+                [`yezi-size-${size}`]: size,
+                [`yezi-level-${level}`]: level,
             };
         });
         return { classes };
@@ -46,11 +46,11 @@ export default {
 $h: 32px;
 $border-color: #d9d9d9;
 $color: #333;
-$blue: #40a9ff;
-$radius: 4px;
-$red: red;
+$theme: #5da501;
+$danger: #e22247;
+$warning: #f3af22;
 $grey: grey;
-.gulu-button {
+.yezi-button {
     box-sizing: border-box;
     height: $h;
     padding: 0 12px;
@@ -62,7 +62,7 @@ $grey: grey;
     background: white;
     color: $color;
     border: 1px solid $border-color;
-    border-radius: $radius;
+    border-radius: 4px;
     box-shadow: 0 1px 0 fade-out(black, 0.95);
     transition: background 250ms;
     & + & {
@@ -70,25 +70,26 @@ $grey: grey;
     }
     &:hover,
     &:focus {
-        color: $blue;
-        border-color: $blue;
+        color: $theme;
+        border-color: $theme;
     }
     &:focus {
         outline: none;
     }
     &::-moz-focus-inner {
+        /*处理 Firefox的focus外边框 */
         border: 0;
     }
-    &.gulu-theme-link {
+    &.yezi-theme-link {
         border-color: transparent;
         box-shadow: none;
-        color: $blue;
+        color: $theme;
         &:hover,
         &:focus {
-            color: lighten($blue, 10%);
+            color: lighten($theme, 10%);
         }
     }
-    &.gulu-theme-text {
+    &.yezi-theme-text {
         border-color: transparent;
         box-shadow: none;
         color: inherit;
@@ -97,64 +98,88 @@ $grey: grey;
             background: darken(white, 5%);
         }
     }
-    &.gulu-size-big {
+    &.yezi-size-big {
         font-size: 24px;
         height: 48px;
         padding: 0 16px;
     }
-    &.gulu-size-small {
+    &.yezi-size-small {
         font-size: 12px;
         height: 20px;
         padding: 0 4px;
     }
-    &.gulu-theme-button {
-        &.gulu-level-main {
-            background: $blue;
+    &.yezi-theme-button {
+        &.yezi-level-main {
+            background: $theme;
             color: white;
-            border-color: $blue;
+            border-color: $theme;
             &:hover,
             &:focus {
-                background: darken($blue, 10%);
-                border-color: darken($blue, 10%);
+                background: darken($theme, 10%);
+                border-color: darken($theme, 10%);
             }
         }
-        &.gulu-level-danger {
-            background: $red;
-            border-color: $red;
+        &.yezi-level-danger {
+            background: $danger;
+            border-color: $danger;
             color: white;
             &:hover,
             &:focus {
-                background: darken($red, 10%);
-                border-color: darken($red, 10%);
+                background: darken($danger, 10%);
+                border-color: darken($danger, 10%);
+            }
+        }
+        &.yezi-level-warning {
+            background: $warning;
+            border-color: $warning;
+            color: white;
+            &:hover,
+            &:focus {
+                background: darken($warning, 10%);
+                border-color: darken($warning, 10%);
             }
         }
     }
-    &.gulu-theme-link {
-        &.gulu-level-danger {
-            color: $red;
+    &.yezi-theme-link {
+        &.yezi-level-danger {
+            color: $danger;
             &:hover,
             &:focus {
-                color: darken($red, 10%);
+                color: darken($danger, 10%);
+            }
+        }
+        &.yezi-level-warning {
+            color: $warning;
+            &:hover,
+            &:focus {
+                color: darken($warning, 10%);
             }
         }
     }
-    &.gulu-theme-text {
-        &.gulu-level-main {
-            color: $blue;
+    &.yezi-theme-text {
+        &.yezi-level-main {
+            color: $theme;
             &:hover,
             &:focus {
-                color: darken($blue, 10%);
+                color: darken($theme, 10%);
             }
         }
-        &.gulu-level-danger {
-            color: $red;
+        &.yezi-level-danger {
+            color: $danger;
             &:hover,
             &:focus {
-                color: darken($red, 10%);
+                color: darken($danger, 10%);
+            }
+        }
+        &.yezi-level-warning {
+            color: $warning;
+            &:hover,
+            &:focus {
+                color: darken($warning, 10%);
             }
         }
     }
-    &.gulu-theme-button {
+    &.yezi-theme-button {
         &[disabled] {
             cursor: not-allowed;
             color: $grey;
@@ -163,26 +188,26 @@ $grey: grey;
             }
         }
     }
-    &.gulu-theme-link,
-    &.gulu-theme-text {
+    &.yezi-theme-link,
+    &.yezi-theme-text {
         &[disabled] {
             cursor: not-allowed;
             color: $grey;
         }
     }
-    > .gulu-loadingIndicator {
+    > .yezi-loadingIndicator {
         width: 14px;
         height: 14px;
         display: inline-block;
         margin-right: 4px;
         border-radius: 8px;
-        border-color: $blue $blue $blue transparent;
+        border-color: $theme $theme $theme transparent;
         border-style: solid;
         border-width: 2px;
-        animation: gulu-spin 1s infinite linear;
+        animation: yezi-spin 1s infinite linear;
     }
 }
-@keyframes gulu-spin {
+@keyframes yezi-spin {
     0% {
         transform: rotate(0deg);
     }

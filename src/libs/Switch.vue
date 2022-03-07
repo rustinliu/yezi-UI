@@ -58,5 +58,8 @@ export default {
             margin-left: -4px;
         }
     }
+    &[disabled] {
+        cursor: not-allowed;
+    }
 }
 </style>
