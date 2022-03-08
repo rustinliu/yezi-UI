@@ -6,7 +6,7 @@
                 <h1>YeZi UI</h1>
                 <h2>一个基于vue 3的UI库</h2>
                 <p class="actions">
-                    <a href="#">GitHub</a>
+                    <a href="https://github.com/rustinliu/yezi-UI">GitHub</a>
                     <router-link to="/doc">Start</router-link>
                 </p>
             </div>
