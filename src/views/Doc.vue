@@ -58,6 +58,7 @@ export default {
         width: 100vw;
         height: 100vh;
         backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
         z-index: 8;
     }
     .mmask-enter-active,

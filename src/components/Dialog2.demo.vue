@@ -4,12 +4,7 @@
 <template>
     <div>
         <Button @click="toggle">打开对话框</Button>
-        <Dialog
-            v-model:visible="open"
-            :closeOnclcikOverlay="false"
-            :onConfirm="fun1"
-            :onCancel="fun2"
-        >
+        <Dialog v-model:visible="open" :overlayClose="false" :onConfirm="fun1" :onCancel="fun2">
             <template v-slot:content>
                 <p>你好</p>
                 <p>这也是一条普通的消息</p>

@@ -3,25 +3,44 @@
         <h1>Switch 组件示例</h1>
         <Demo :component="Switch1Demo" />
         <Demo :component="Switch2Demo" />
+        <Attr :attributes="data" />
     </div>
 </template>
 
 <script lang="ts">
 import Switch1Demo from './Switch1.demo.vue';
 import Switch2Demo from './Switch2.demo.vue';
-
+import Attr from './Attrs.vue';
 import Demo from './Demo.vue';
 import { ref } from 'vue';
 export default {
     components: {
         Demo,
+        Attr,
     },
     setup() {
         const bool = ref(false);
+        const data = [
+            {
+                parameter: 'value',
+                description: '开关是否开启',
+                type: 'boolean',
+                options: 'true / false',
+                default: 'false',
+            },
+            {
+                parameter: 'disabled',
+                description: '开关是否禁用',
+                type: 'boolean',
+                options: 'true / false',
+                default: 'false',
+            },
+        ];
         return {
             bool,
             Switch1Demo,
             Switch2Demo,
+            data,
         };
     },
 };

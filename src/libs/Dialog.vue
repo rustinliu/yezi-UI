@@ -37,7 +37,7 @@ export default {
             type: Boolean,
             default: false,
         },
-        closeOnclcikOverlay: {
+        overlayClose: {
             type: Boolean,
             default: true,
         },
@@ -58,7 +58,7 @@ export default {
             context.emit('update:visible', false);
         };
         const onClickOverlay = () => {
-            if (props.closeOnclcikOverlay) {
+            if (props.overlayClose) {
                 close();
             }
         };
@@ -99,6 +99,7 @@ $border-color: #d9d9d9;
         width: 100%;
         height: 100%;
         backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
         z-index: 10;
     }
 
