@@ -1,5 +1,5 @@
 <template>
-    <div class="yezi-tabs">
+    <div class="yezi-tabs" :class="{ card: theme === 'card' }">
         <div class="yezi-tabs-nav" ref="container">
             <div
                 class="yezi-tabs-nav-item"
@@ -29,6 +29,9 @@ import { computed, ref, watchEffect, onMounted } from 'vue';
 export default {
     props: {
         selected: {
+            type: String,
+        },
+        theme: {
             type: String,
         },
     },
@@ -83,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss">
-$blue: #40a9ff;
+$theme: #5da501;
 $color: #333;
 $border-color: #d9d9d9;
 
@@ -104,14 +107,14 @@ $border-color: #d9d9d9;
             }
 
             &.selected {
-                color: $blue;
+                color: $theme;
             }
         }
 
         &-indicator {
             position: absolute;
             height: 3px;
-            background: $blue;
+            background: $theme;
             left: 0;
             bottom: -1px;
             width: 100px;
@@ -121,6 +124,37 @@ $border-color: #d9d9d9;
 
     &-content {
         padding: 8px 0;
+    }
+}
+.card {
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 1px 3px fade-out(black, 0.8);
+    .yezi-tabs-nav {
+        background: $theme;
+        color: white;
+        &-item {
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            padding: 8px 16px;
+            margin: 0;
+            transition: all 0.3s;
+            &.selected {
+                border-left: 1px solid #d9d9d9;
+                border-right: 1px solid #d9d9d9;
+                background: #fff;
+            }
+            &:first-child {
+                border-left: none;
+            }
+        }
+        &-indicator {
+            background: #fff;
+            height: 1px;
+            bottom: -1px;
+        }
+    }
+    .yezi-tabs-content {
+        padding: 24px 16px;
     }
 }
 </style>

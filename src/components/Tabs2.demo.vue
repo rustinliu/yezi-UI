@@ -1,8 +1,8 @@
 <demo>
-基本使用
+卡片样式
 </demo>
 <template>
-    <Tabs v-model:selected="st">
+    <Tabs v-model:selected="st" theme="card">
         <Tab title="导航1">这是内容1</Tab>
         <Tab title="导航2">这是内容2</Tab>
         <Tab title="导航3">这是内容3</Tab>
