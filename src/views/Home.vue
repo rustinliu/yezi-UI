@@ -48,13 +48,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$green: #02bcb0;
 $border-radius: 4px;
-$themecolor: #2a484e;
 
 .topnavAndBanner {
-    background: rgb(168, 216, 205);
-    background: radial-gradient(circle, rgba(168, 216, 205, 1) 0%, rgba(199, 240, 241, 1) 100%);
+    background: linear-gradient(135deg, #42e695, #3bb2b8);
     clip-path: ellipse(80% 60% at 50% 40%);
 }
 .features {
@@ -96,7 +93,7 @@ $themecolor: #2a484e;
     }
 }
 .banner {
-    color: $themecolor;
+    color: white;
     padding: 100px 0;
     display: flex;
     justify-content: center;
@@ -106,7 +103,7 @@ $themecolor: #2a484e;
         padding: 8px 0;
         a {
             margin: 0 8px;
-            background: $green;
+            background: #42e695;
             color: #fff;
             display: inline-block;
             padding: 8px 24px;
