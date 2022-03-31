@@ -20,6 +20,9 @@
             <li>
                 <router-link to="/doc/tabs">Tabs 组件</router-link>
             </li>
+            <li>
+                <router-link to="/doc/progress">Progress 组件</router-link>
+            </li>
         </ol>
     </div>
 </template>

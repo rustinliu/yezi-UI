@@ -7,6 +7,7 @@ import DialogDemo from './components/DialogDemo.vue';
 import TabsDemo from './components/TabsDemo.vue';
 import { h } from 'vue';
 import Markdown from './components/Markdown.vue';
+import Progress from './components/ProgressDemo.vue';
 import intro from './markdown/intro.md';
 import install from './markdown/install.md';
 import getStarted from './markdown/get-started.md';
@@ -26,6 +27,7 @@ export const router = createRouter({
                 { path: 'button', component: ButtonDemo },
                 { path: 'dialog', component: DialogDemo },
                 { path: 'tabs', component: TabsDemo },
+                { path: 'progress', component: Progress },
                 { path: 'intro', component: md(intro) },
                 { path: 'get-started', component: md(getStarted) },
                 { path: 'install', component: md(install) },
