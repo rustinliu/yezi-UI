@@ -1,13 +1,6 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
-import Home from './views/Home.vue';
-import Doc from './views/Doc.vue';
-import SwitchDemo from './components/SwitchDemo.vue';
-import ButtonDemo from './components/ButtonDemo.vue';
-import DialogDemo from './components/DialogDemo.vue';
-import TabsDemo from './components/TabsDemo.vue';
 import { h } from 'vue';
 import Markdown from './components/Markdown.vue';
-import Progress from './components/ProgressDemo.vue';
 import intro from './markdown/intro.md';
 import install from './markdown/install.md';
 import getStarted from './markdown/get-started.md';
@@ -17,17 +10,17 @@ const history = createWebHashHistory();
 export const router = createRouter({
     history,
     routes: [
-        { path: '/', component: Home },
+        { path: '/', component: () => import('./views/Home.vue') },
         {
             path: '/doc',
-            component: Doc,
+            component: () => import('./views/Doc.vue'),
             children: [
                 { path: '', redirect: '/doc/intro' },
-                { path: 'switch', component: SwitchDemo },
-                { path: 'button', component: ButtonDemo },
-                { path: 'dialog', component: DialogDemo },
-                { path: 'tabs', component: TabsDemo },
-                { path: 'progress', component: Progress },
+                { path: 'switch', component: () => import('./components/SwitchDemo.vue') },
+                { path: 'button', component: () => import('./components/ButtonDemo.vue') },
+                { path: 'dialog', component: () => import('./components/DialogDemo.vue') },
+                { path: 'tabs', component: () => import('./components/TabsDemo.vue') },
+                { path: 'progress', component: () => import('./components/ProgressDemo.vue') },
                 { path: 'intro', component: md(intro) },
                 { path: 'get-started', component: md(getStarted) },
                 { path: 'install', component: md(install) },
